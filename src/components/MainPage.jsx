@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../theme';
@@ -238,6 +238,15 @@ const ChestHandle = styled.div`
 
 const MainPage = ({ onTermsAccepted }) => {
   const [lockOpened, setLockOpened] = useState(false);
+
+  useEffect(() => {
+    // Automatycznie uruchom animację skrzyni po 3 sekundach
+    const timer = setTimeout(() => {
+      setLockOpened(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const lockVariants = {
     closed: {

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import { theme } from './theme';
+import LoadingScreen from './components/LoadingScreen';
 import MainPage from './components/MainPage';
 import TaskList from './components/TaskList';
 import CombinationLock from './components/CombinationLock';
@@ -31,7 +32,12 @@ const PuzzleContainer = styled.div`
 `;
 
 function App() {
+  const [showLoading, setShowLoading] = useState(true);
   const [currentView, setCurrentView] = useState('main'); // 'main' | 'puzzle' | 'success'
+
+  const handleLoadingComplete = () => {
+    setShowLoading(false);
+  };
 
   const handleTermsAccepted = () => {
     setCurrentView('puzzle');
@@ -44,18 +50,22 @@ function App() {
   return (
     <AppContainer>
       <AnimatePresence mode="wait">
-        {currentView === 'main' && (
+        {showLoading && (
+          <LoadingScreen key="loading" onComplete={handleLoadingComplete} />
+        )}
+        
+        {!showLoading && currentView === 'main' && (
           <MainPage key="main" onTermsAccepted={handleTermsAccepted} />
         )}
         
-        {currentView === 'puzzle' && (
+        {!showLoading && currentView === 'puzzle' && (
           <PuzzleContainer key="puzzle">
             <TaskList />
             <CombinationLock onSuccess={handleCodeSuccess} />
           </PuzzleContainer>
         )}
         
-        {currentView === 'success' && (
+        {!showLoading && currentView === 'success' && (
           <SuccessScreen key="success" />
         )}
       </AnimatePresence>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="lockGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#533483;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6d4ba3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dialGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a3a5a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a1a3a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#lockGradient)" stroke="#3d2563" stroke-width="2" filter="url(#glow)"/>
+  
+  <!-- Lock body -->
+  <rect x="30" y="40" width="40" height="35" rx="5" fill="#2a1a3a" stroke="#4a3a5a" stroke-width="1.5"/>
+  
+  <!-- Lock shackle -->
+  <path d="M 35 40 Q 35 25, 50 25 Q 65 25, 65 40" 
+        fill="none" 
+        stroke="#6d4ba3" 
+        stroke-width="4" 
+        stroke-linecap="round"
+        filter="url(#glow)"/>
+  
+  <!-- Combination dials (3 visible) -->
+  <!-- Dial 1 -->
+  <circle cx="40" cy="57" r="6" fill="url(#dialGradient)" stroke="#6d4ba3" stroke-width="1"/>
+  <line x1="40" y1="51" x2="40" y2="47" stroke="#e4e4e4" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Dial 2 -->
+  <circle cx="50" cy="57" r="6" fill="url(#dialGradient)" stroke="#6d4ba3" stroke-width="1"/>
+  <line x1="50" y1="51" x2="50" y2="47" stroke="#e4e4e4" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Dial 3 -->
+  <circle cx="60" cy="57" r="6" fill="url(#dialGradient)" stroke="#6d4ba3" stroke-width="1"/>
+  <line x1="60" y1="51" x2="60" y2="47" stroke="#e4e4e4" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Keyhole -->
+  <circle cx="50" cy="65" r="3" fill="#1a1a2e"/>
+  <rect x="48" y="65" width="4" height="6" fill="#1a1a2e"/>
+</svg>
+
