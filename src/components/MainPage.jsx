@@ -93,59 +93,300 @@ const Chest = styled(motion.div)`
   position: absolute;
   width: 250px;
   height: 200px;
-  background: linear-gradient(135deg, #2a1f3d 0%, #1a1528 100%);
-  border-radius: 10px;
+  background: linear-gradient(135deg, #1a0f1a 0%, #0f080f 50%, #1a0f1a 100%);
+  border-radius: 8px;
   box-shadow: 
-    inset 0 2px 10px rgba(0, 0, 0, 0.5),
+    inset 0 3px 15px rgba(0, 0, 0, 0.7),
     ${theme.shadows.dark},
-    0 0 30px rgba(83, 52, 131, 0.3);
+    0 0 40px rgba(83, 52, 131, 0.4);
   z-index: 1;
-  border: 2px solid ${theme.colors.primaryDark};
+  border: 3px solid #2a1a1a;
   
-  /* Wood grain effect */
+  /* Weathered wood texture */
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.2) 3px,
+      rgba(0, 0, 0, 0.2) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 8px,
+      rgba(139, 69, 19, 0.1) 8px,
+      rgba(139, 69, 19, 0.1) 9px
+    ),
+    linear-gradient(135deg, #2a1a1a 0%, #1a0f1a 50%, #2a1a1a 100%);
+`;
+
+const ChestLid = styled(motion.div)`
+  position: absolute;
+  top: 25px;
+  left: 26px;
+  transform: translateX(-50%);
+  width: 248px;
+  height: 32px;
+  background: linear-gradient(180deg, #2a1a1a 0%, #1a0f1a 100%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: 
+    inset 0 3px 10px rgba(0, 0, 0, 0.6),
+    0 3px 15px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  border: 3px solid #2a1a1a;
+  border-bottom: none;
+  
+  /* Wood grain on lid */
   background-image: 
     repeating-linear-gradient(
       90deg,
       transparent,
       transparent 2px,
-      rgba(0, 0, 0, 0.1) 2px,
-      rgba(0, 0, 0, 0.1) 4px
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 3px
     ),
-    linear-gradient(135deg, #2a1f3d 0%, #1a1528 100%);
+    linear-gradient(180deg, #2a1a1a 0%, #1a0f1a 100%);
+`;
+
+const ChestFeet = styled.div`
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  display: flex;
+  justify-content: space-around;
+  z-index: 1;
   
-  /* Metal corners */
+  &::before,
+  &::after {
+    content: '';
+    width: 20px;
+    height: 8px;
+    background: linear-gradient(180deg, #1a0f1a 0%, #0f080f 100%);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+  }
+  
+  &::before {
+    margin-left: 15px;
+  }
+  
+  &::after {
+    margin-right: 15px;
+  }
+`;
+
+const MetalBand = styled.div`
+  position: absolute;
+  background: linear-gradient(180deg, #8b6914 0%, #5d4a1a 50%, #3d2a0a 100%);
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 200, 100, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.8);
+  border-radius: 3px;
+`;
+
+const LidBand1 = styled(MetalBand)`
+  top: 10px;
+  left: 8%;
+  width: 84%;
+  height: 6px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 3;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #cd853f 0%, #8b6914 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(255, 200, 100, 0.4);
+  }
+  
+  &::before {
+    left: 12%;
+  }
+  
+  &::after {
+    right: 12%;
+  }
+`;
+
+const LidBand2 = styled(MetalBand)`
+  top: 22px;
+  left: 8%;
+  width: 84%;
+  height: 6px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 3;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #cd853f 0%, #8b6914 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(255, 200, 100, 0.4);
+  }
+  
+  &::before {
+    left: 12%;
+  }
+  
+  &::after {
+    right: 12%;
+  }
+`;
+
+const CornerStrap = styled(MetalBand)`
+  width: 8px;
+  height: 100%;
+  z-index: 3;
+  
   &::before {
     content: '';
     position: absolute;
-    top: -12px;
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 25px;
-    background: linear-gradient(180deg, #4a3a5a 0%, #3a2a4a 50%, #2a1a3a 100%);
-    border-radius: 12px 12px 0 0;
-    box-shadow: 
-      inset 0 2px 5px rgba(255, 255, 255, 0.1),
-      0 2px 10px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(109, 75, 163, 0.3);
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #cd853f 0%, #8b6914 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(255, 200, 100, 0.4);
   }
+`;
+
+const LeftCornerStrap = styled(CornerStrap)`
+  left: 0;
+  border-radius: 8px 0 0 8px;
+`;
+
+const RightCornerStrap = styled(CornerStrap)`
+  right: 0;
+  border-radius: 0 8px 8px 0;
+`;
+
+const LockPlate = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(180deg, #8b6914 0%, #5d4a1a 50%, #3d2a0a 100%);
+  border-radius: 8px;
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 200, 100, 0.2),
+    0 3px 10px rgba(0, 0, 0, 0.8);
+  z-index: 4;
   
-  /* Lock plate */
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, #4a3a5a 0%, #2a1a3a 100%);
+    width: 8px;
+    height: 12px;
+    background: #0f080f;
+    border-radius: 0 0 4px 4px;
+  }
+`;
+
+const PurpleOrb = styled(motion.div)`
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.9) 0%, rgba(75, 0, 130, 0.7) 70%, rgba(25, 25, 112, 0.5) 100%);
+  box-shadow: 
+    0 0 30px rgba(138, 43, 226, 0.8),
+    0 0 60px rgba(138, 43, 226, 0.5),
+    inset 0 0 20px rgba(255, 255, 255, 0.2);
+  z-index: 3;
+  animation: pulse 2s ease-in-out infinite;
+  
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 
+        0 0 30px rgba(138, 43, 226, 0.8),
+        0 0 60px rgba(138, 43, 226, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      box-shadow: 
+        0 0 40px rgba(138, 43, 226, 1),
+        0 0 80px rgba(138, 43, 226, 0.7),
+        inset 0 0 25px rgba(255, 255, 255, 0.3);
+    }
+  }
+`;
+
+const OrbFrame = styled.div`
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border: 4px solid;
+  border-image: linear-gradient(180deg, #8b6914 0%, #5d4a1a 50%, #3d2a0a 100%) 1;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 200, 100, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
     border-radius: 50%;
-    box-shadow: 
-      inset 0 2px 5px rgba(0, 0, 0, 0.5),
-      ${theme.shadows.glow},
-      0 0 20px rgba(109, 75, 163, 0.6);
-    border: 2px solid rgba(109, 75, 163, 0.5);
+    background: linear-gradient(180deg, #cd853f 0%, #8b6914 50%, #5d4a1a 100%);
+    z-index: -1;
+  }
+`;
+
+const SideHandle = styled.div`
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 30px;
+  background: linear-gradient(90deg, #8b6914 0%, #5d4a1a 50%, #3d2a0a 100%);
+  border-radius: 10px;
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 200, 100, 0.2),
+    3px 0 8px rgba(0, 0, 0, 0.8);
+  z-index: 3;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
   }
 `;
 
@@ -153,60 +394,14 @@ const ChestBoard = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  
-  /* Vertical boards */
-  &::before {
-    content: '';
-    position: absolute;
-    left: 20%;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    right: 20%;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-  }
 `;
 
 const ChestMetalBands = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  
-  /* Horizontal metal bands */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 30%;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #4a3a5a 20%, #4a3a5a 80%, transparent);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 30%;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #4a3a5a 20%, #4a3a5a 80%, transparent);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  }
 `;
 
 const ChestHandle = styled.div`
@@ -289,6 +484,22 @@ const MainPage = ({ onTermsAccepted }) => {
     },
   };
 
+  const lidVariants = {
+    hidden: {
+      rotateX: 0,
+      y: 0,
+    },
+    revealed: {
+      rotateX: -15,
+      y: -5,
+      transition: {
+        delay: 0.5,
+        duration: 1,
+        ease: 'easeOut',
+      },
+    },
+  };
+
   const containerVariants = {
     initial: { opacity: 0 },
     animate: {
@@ -326,8 +537,22 @@ const MainPage = ({ onTermsAccepted }) => {
           >
             <ChestBoard />
             <ChestMetalBands />
-            <ChestHandle />
+            <ChestFeet />
+            <LeftCornerStrap />
+            <RightCornerStrap />
+            <LockPlate />
+            <OrbFrame />
+            <PurpleOrb />
+            <SideHandle />
           </Chest>
+          <ChestLid
+            variants={lidVariants}
+            initial="hidden"
+            animate={lockOpened ? 'revealed' : 'hidden'}
+          >
+            <LidBand1 />
+            <LidBand2 />
+          </ChestLid>
           <Lock
             variants={lockVariants}
             initial="closed"

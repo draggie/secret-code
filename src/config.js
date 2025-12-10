@@ -1,5 +1,5 @@
 // Configurable secret code (6 digits)
-export const SECRET_CODE = [1, 2, 3, 4, 5, 6];
+export const SECRET_CODE = [8, 2, 0, 5, 1, 6];
 
 // Configurable family members list
 export const FAMILY_MEMBERS = [
